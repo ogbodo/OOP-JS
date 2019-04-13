@@ -17,10 +17,14 @@ function AdminUser(userName, email, password) {
     this.saveUsers(users);
     return this.getListOfUsers();
   };
+  this.deleteAllUsers = function() {
+    var users = this.getListOfUsers();
+    users.splice(0, users.length);
+    this.saveUsers(users);
+    return this.getListOfUsers();
+  };
 }
 
 InheritProperty(AdminUser, User);
-
-AdminUser.prototype.deleteAllUsers = function() {};
 
 module.exports = AdminUser;

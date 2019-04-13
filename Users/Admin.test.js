@@ -59,3 +59,7 @@ test("Admin can delete a user", function() {
   );
   expect(admin.deleteUserById(userToDelete.id).length).toBe(oldLength);
 });
+
+test("Admin can delete all users", function() {
+  expect(admin.deleteAllUsers().length).toBe(0);
+});
