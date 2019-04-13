@@ -5,6 +5,7 @@ function User(name, email, password) {
   this.email = email;
   this.password = password;
   this.id = 0;
+
   this.createNewUser = function() {
     var listOfUsers = [];
     listOfUsers.push.apply(listOfUsers, getListOfUsers());
@@ -21,11 +22,7 @@ function User(name, email, password) {
 
     listOfUsers.push(obj);
 
-    fileSystem.writeFileSync(
-      "../db.json",
-      JSON.stringify(listOfUsers, null, 2),
-      null
-    );
+    saveUser(listOfUsers);
   };
 
   this.createNewUser();
@@ -54,7 +51,28 @@ function readJsonFile(filePath) {
   return JSON.parse(jsonString);
 }
 User.prototype.getuserByName = function(userName) {};
-User.prototype.updateUserDetails = function(name, email, password) {};
+
+User.prototype.updateUserDetails = function(userId, name, email, password) {
+  var users = this.getListOfUsers();
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].id == userId) {
+      users[i].name = name;
+      users[i].email = email;
+      users[i].password = password;
+      break;
+    }
+  }
+  saveUser(users);
+  return this.getUserById(userId);
+};
+function saveUser(listOfUsers) {
+  fileSystem.writeFileSync(
+    "../db.json",
+    JSON.stringify(listOfUsers, null, 2),
+    null
+  );
+}
+function getObjectById() {}
 User.prototype.updateUserEmail = function(email) {};
 User.prototype.updateUserPassword = function(password) {};
 

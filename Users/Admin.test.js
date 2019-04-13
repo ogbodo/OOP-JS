@@ -28,3 +28,14 @@ test("Admin can search for a user by id", function() {
 test("User can search for a user by id", function() {
   expect(user.getUserById(admin.id).id).toBe(admin.id);
 });
+
+/**TODO 1*/
+// test("User cannot read all users", function() {
+//   expect(user.getListOfUsers()).toBe("Truthy()");
+// });
+test("Admin can update the details of a user", function() {
+  console.log(user);
+  expect(
+    admin.updateUserDetails(user.id, "Treasure", "tres@gmail.com", "tressy").id
+  ).toBe(user.id);
+});
