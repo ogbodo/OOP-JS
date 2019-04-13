@@ -1,4 +1,4 @@
-var users = require("../db.json");
+// var users = require("../db.json");
 
 function User(name, email, password) {
   this.name = name;
