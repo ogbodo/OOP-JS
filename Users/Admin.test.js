@@ -17,7 +17,7 @@ test("Persist user profile detail into db.json file", function() {
   expect(newAdmin.getListOfUsers().length).toBe(oldLength + 1);
 });
 
-test("Admin can create normal user", function() {
+test("create normal user", function() {
   user = new normalUser("User1", "solomon@gmail.com", "solomon1");
   expect(user.name).toBe("User1");
 });
