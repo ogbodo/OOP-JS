@@ -38,31 +38,45 @@ function User(name, email, password) {
   this.getListOfUsers = function() {
     return getListOfUsers();
   };
+
+  this.updateUserDetails = function(userId, name, email, password) {
+    var users = this.getListOfUsers();
+    for (var i = 0; i < users.length; i++) {
+      if (users[i].id == userId) {
+        users[i].name = name;
+        users[i].email = email;
+        users[i].password = password;
+        break;
+      }
+    }
+    this.saveUsers(users);
+    return this.getUserById(userId);
+  };
+
+  this.getUserByName = function(name) {
+    var users = this.getListOfUsers();
+    var foundUser = false;
+    for (var i = 0; i < users.length; i++) {
+      if (users[i].name == name) {
+        foundUser = users[i];
+        break;
+      }
+    }
+    return foundUser;
+  };
+
+  this.getUserById = function(userId) {
+    var users = getListOfUsers();
+    var foundUser = false;
+    for (var i = 0; i < users.length; i++) {
+      if (users[i].id == userId) {
+        foundUser = users[i];
+        break;
+      }
+    }
+    return foundUser;
+  };
 }
-
-User.prototype.getUserById = function(userId) {
-  var users = this.getListOfUsers();
-  var foundUser = false;
-  for (var i = 0; i < users.length; i++) {
-    if (users[i].id == userId) {
-      foundUser = users[i];
-      break;
-    }
-  }
-  return foundUser;
-};
-
-User.prototype.getUserByName = function(name) {
-  var users = this.getListOfUsers();
-  var foundUser = false;
-  for (var i = 0; i < users.length; i++) {
-    if (users[i].name == name) {
-      foundUser = users[i];
-      break;
-    }
-  }
-  return foundUser;
-};
 
 function getListOfUsers() {
   return readJsonFile("../db.json");
@@ -72,20 +86,5 @@ function readJsonFile(filePath) {
   const jsonString = fileSystem.readFileSync(filePath);
   return JSON.parse(jsonString);
 }
-
-User.prototype.updateUserDetails = function(userId, name, email, password) {
-  var users = this.getListOfUsers();
-  for (var i = 0; i < users.length; i++) {
-    if (users[i].id == userId) {
-      users[i].name = name;
-      users[i].email = email;
-      users[i].password = password;
-      break;
-    }
-  }
-  this.saveUsers(users);
-
-  return this.getUserById(userId);
-};
 
 module.exports = User;

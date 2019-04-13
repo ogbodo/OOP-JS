@@ -17,6 +17,7 @@ function AdminUser(userName, email, password) {
     this.saveUsers(users);
     return this.getListOfUsers();
   };
+
   this.deleteAllUsers = function() {
     var users = this.getListOfUsers();
     users.splice(0, users.length);
