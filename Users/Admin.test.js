@@ -1,17 +1,20 @@
 const adminUser = require("./Admin");
+const normalUser = require("./NormalUser");
+
 var admin;
+
 test("create new admin user", function() {
   admin = new adminUser("Ogbodo", "solomon@gmail.com", "solomon");
-  expect(admin.name).toMatch("Ogbodo");
+  expect(admin.name).toBe("Ogbodo");
 });
+
 test("Persist user profile detail into db.json file", function() {
   var oldLength = admin.getListOfUsers().length;
-  var newAdmin = new adminUser("Ogbodo", "solomon@gmail.com", "solomon");
-
+  var newAdmin = new adminUser("Solomon", "solomon@gmail.com", "king");
   expect(newAdmin.getListOfUsers().length).toBe(oldLength + 1);
 });
 
-// test("Admin read a single user by id", function() {
-//     var user = new adminUser("Ogbodo", "solomon@gmail.com", "solomon");
-//     expect(user.name).toMatch("Ogbodo");
-//   });
+test("Admin create normal user", function() {
+  var user = new normalUser("Ogbodo1", "solomon@gmail.com", "solomon1");
+  expect(user.name).toBe("Ogbodo1");
+});
