@@ -40,14 +40,13 @@ test("Admin can update the details of a user", function() {
 });
 
 test("User can update his/her details", function() {
-  expect(
-    user.updateUserDetails(
-      user.id,
-      "Ogbonna Treasure",
-      "tres@gmail.com",
-      "tressy"
-    ).id
-  ).toBe(user.id);
+  user = user.updateUserDetails(
+    user.id,
+    "Ogbonna Treasure",
+    "tres@gmail.com",
+    "tressy"
+  );
+  expect(user.id).toBe(user.id);
 });
 
 test("Admin can delete a user", function() {
@@ -60,6 +59,9 @@ test("Admin can delete a user", function() {
   expect(admin.deleteUserById(userToDelete.id).length).toBe(oldLength);
 });
 
+test("Admin can search for a user by name", function() {
+  expect(admin.getUserByName(user.name)).toBeTruthy();
+});
 test("Admin can delete all users", function() {
   expect(admin.deleteAllUsers().length).toBe(0);
 });

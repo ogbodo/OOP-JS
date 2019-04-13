@@ -52,6 +52,18 @@ User.prototype.getUserById = function(userId) {
   return foundUser;
 };
 
+User.prototype.getUserByName = function(name) {
+  var users = this.getListOfUsers();
+  var foundUser = false;
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].name == name) {
+      foundUser = users[i];
+      break;
+    }
+  }
+  return foundUser;
+};
+
 function getListOfUsers() {
   return readJsonFile("../db.json");
 }
