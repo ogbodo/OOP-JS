@@ -49,3 +49,13 @@ test("User can update his/her details", function() {
     ).id
   ).toBe(user.id);
 });
+
+test("Admin can delete a user", function() {
+  var oldLength = admin.getListOfUsers().length;
+  var userToDelete = new normalUser(
+    "nameToDelete",
+    "solomon@gmail.com",
+    "king"
+  );
+  expect(admin.deleteUserById(userToDelete.id).length).toBe(oldLength);
+});

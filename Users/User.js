@@ -6,6 +6,14 @@ function User(name, email, password) {
   this.password = password;
   this.id = 0;
 
+  this.saveUsers = function(listOfUsers) {
+    fileSystem.writeFileSync(
+      "../db.json",
+      JSON.stringify(listOfUsers, null, 2),
+      null
+    );
+  };
+
   this.createNewUser = function() {
     var listOfUsers = [];
     listOfUsers.push.apply(listOfUsers, getListOfUsers());
@@ -22,7 +30,7 @@ function User(name, email, password) {
 
     listOfUsers.push(obj);
 
-    saveUser(listOfUsers);
+    this.saveUsers(listOfUsers);
   };
 
   this.createNewUser();
@@ -43,14 +51,15 @@ User.prototype.getUserById = function(userId) {
   }
   return foundUser;
 };
+
 function getListOfUsers() {
   return readJsonFile("../db.json");
 }
+
 function readJsonFile(filePath) {
   const jsonString = fileSystem.readFileSync(filePath);
   return JSON.parse(jsonString);
 }
-User.prototype.getuserByName = function(userName) {};
 
 User.prototype.updateUserDetails = function(userId, name, email, password) {
   var users = this.getListOfUsers();
@@ -62,18 +71,9 @@ User.prototype.updateUserDetails = function(userId, name, email, password) {
       break;
     }
   }
-  saveUser(users);
+  this.saveUsers(users);
+
   return this.getUserById(userId);
 };
-function saveUser(listOfUsers) {
-  fileSystem.writeFileSync(
-    "../db.json",
-    JSON.stringify(listOfUsers, null, 2),
-    null
-  );
-}
-function getObjectById() {}
-User.prototype.updateUserEmail = function(email) {};
-User.prototype.updateUserPassword = function(password) {};
 
 module.exports = User;
