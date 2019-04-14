@@ -12,11 +12,12 @@ function AdminUser(userName, email, password) {
     for (var i = 0; i < users.length; i++) {
       if (users[i].id == userId) {
         users.splice(i, 1);
-        break;
+        this.saveUsers(users);
+        return this.getListOfUsers();
       }
     }
-    this.saveUsers(users);
-    return this.getListOfUsers();
+
+    return false;
   };
 
   this.deleteAllUsers = function() {
@@ -36,6 +37,10 @@ function AdminUser(userName, email, password) {
 
   this.updateOrder = function(orderId, items) {
     return order.updateOrder(orderId, items);
+  };
+
+  this.deleteOrderById = function(orderId) {
+    return order.deleteOrderById(orderId);
   };
 }
 

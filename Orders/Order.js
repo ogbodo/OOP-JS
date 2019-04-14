@@ -37,20 +37,39 @@ function Order(userId, items) {
   };
 
   this.createNewOrder();
+
   this.getAllOrders = function() {
     return retrieveAllOrders();
   };
+
   this.getOrderById = function(orderId) {
     return retrieveOrderById(orderId);
   };
+
   this.updateOrder = function(orderId, items) {
     return updateOrder(orderId, items);
   };
+  this.deleteOrderById = function(orderId) {
+    return deleteOrderById(orderId);
+  };
 }
+
 Order.prototype.getAUserOrders = function() {
   return retrieveAUserOrders(this.id);
 };
-
+function deleteOrderById(orderId) {
+  var orders = retrieveAllOrders();
+  var foundOrder = false;
+  for (var i = 0; i < orders.length; i++) {
+    if (orders[i].id == orderId) {
+      orders.splice(i, 1);
+      saveOrders(orders);
+      orders = retrieveAllOrders();
+      foundOrder = true;
+    }
+  }
+  return foundOrder !== false ? orders : foundOrder;
+}
 function retrieveAllOrders() {
   return readJsonFile("../orders.json");
 }

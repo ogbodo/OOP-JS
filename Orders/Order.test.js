@@ -42,3 +42,12 @@ test("Admin can update order details", function() {
   ];
   expect(admin.updateOrder(order.id, itemUpdate)).toBeTruthy();
 });
+
+test("Admin can delete an order", function() {
+  var oldLength = admin.getAllOrders().length;
+  admin.addToCart({ itemName: "Yoghurt", qty: 65 });
+  admin.addToCart({ itemName: "Soya Milk", qty: 99 });
+  var orderToDelete = admin.checkOut();
+
+  expect(admin.deleteOrderById(orderToDelete.id).length).toBe(oldLength);
+});
