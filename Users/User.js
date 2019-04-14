@@ -1,10 +1,12 @@
 const fileSystem = require("fs");
+const orderObject = require("../Orders/Order.js");
 
 function User(name, email, password) {
   this.name = name;
   this.email = email;
   this.password = password;
   this.id = 0;
+  this.listOfUserOrders = [];
 
   this.saveUsers = function(listOfUsers) {
     fileSystem.writeFileSync(
@@ -76,8 +78,15 @@ function User(name, email, password) {
     }
     return foundUser;
   };
-
-  this.makeOrder = function(orderObj) {};
+  this.addToCart = function(item) {
+    this.listOfUserOrders.push(item);
+  };
+  this.checkOut = function() {
+    return new orderObject(this.id, this.listOfUserOrders);
+  };
+  this.getAUserOders = function() {
+    return this.getAUserOrders(this.id);
+  };
 }
 
 function getListOfUsers() {
@@ -88,5 +97,7 @@ function readJsonFile(filePath) {
   const jsonString = fileSystem.readFileSync(filePath);
   return JSON.parse(jsonString);
 }
+
+User.prototype = orderObject.prototype;
 
 module.exports = User;

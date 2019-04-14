@@ -31,7 +31,7 @@ test("User can search for a user by id", function() {
 
 /**TODO 1*/
 // test("User cannot read all users", function() {
-//   expect(user.getListOfUsers()).toBe("Truthy()");
+//   expect(user.getListOfUsers()).toBeFalsy();
 // });
 test("Admin can update the details of a user", function() {
   expect(
