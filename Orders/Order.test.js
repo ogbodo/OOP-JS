@@ -27,3 +27,10 @@ test("A Normal User can create new Order", function() {
 test("Admin can read all orders", function() {
   expect(admin.getAllOrders()).toBeTruthy();
 });
+test("Admin can read one order by its id", function() {
+  admin.addToCart({ itemName: "Bournvita", qty: 21 });
+  admin.addToCart({ itemName: "Malt", qty: 99 });
+  admin.addToCart({ itemName: "Butter", qty: 75 });
+  var orderId = admin.checkOut().id;
+  expect(admin.getOrderById(orderId)).toBeTruthy();
+});

@@ -45,9 +45,11 @@ function Order(userId, items) {
   };
 
   this.createNewOrder();
-
   this.getAllOrders = function() {
     return retrieveAllOrders();
+  };
+  this.getOrderById = function(orderId) {
+    return retrieveOrderById(orderId);
   };
 }
 Order.prototype.getAUserOrders = function() {
@@ -71,6 +73,17 @@ function retrieveAUserOrders(userId) {
 
 function retrieveAUserOrder(userId, orderId) {}
 
+function retrieveOrderById(orderId) {
+  var orders = retrieveAllOrders();
+  var foundOrder = false;
+  for (var i = 0; i < orders.length; i++) {
+    if (orders[i].id == orderId) {
+      foundOrder = orders[i];
+      break;
+    }
+  }
+  return foundOrder;
+}
 function readJsonFile(filePath) {
   const jsonString = fileSystem.readFileSync(filePath);
   return JSON.parse(jsonString);

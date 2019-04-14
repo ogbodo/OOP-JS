@@ -25,8 +25,13 @@ function AdminUser(userName, email, password) {
     this.saveUsers(users);
     return this.getListOfUsers();
   };
+
   this.getAllOrders = function() {
     return order.getAllOrders();
+  };
+
+  this.getOrderById = function(orderId) {
+    return order.getOrderById(orderId);
   };
 }
 
