@@ -12,9 +12,8 @@ test("An Admin can create new Order", function() {
   admin.addToCart({ itemName: "Milo", qty: 40 });
   admin.addToCart({ itemName: "conflask", qty: 5 });
   admin.checkOut();
-  var count = admin.getAUserOders().length;
-  console.log("Admin: ", count);
-  expect(count).toBe(previousOrderCount + 1);
+
+  expect(admin.getAUserOders().length).toBe(previousOrderCount + 1);
 });
 test("A Normal User can create new Order", function() {
   user = new normalUser("Treasure Izu", "solomon@gmail.com", "solomon");
@@ -25,8 +24,6 @@ test("A Normal User can create new Order", function() {
   user.addToCart({ itemName: "Indomi", qty: 50 });
   user.addToCart({ itemName: "Spagetti", qty: 102 });
   user.checkOut();
-  var count = user.getAUserOders().length;
-  console.log("User: ", count);
 
-  expect(count).toBe(previousOrderCount + 1);
+  expect(user.getAUserOders().length).toBe(previousOrderCount + 1);
 });
