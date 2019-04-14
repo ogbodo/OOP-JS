@@ -9,15 +9,18 @@ function AdminUser(userName, email, password) {
 
   this.deleteUserById = function(userId) {
     var users = this.getListOfUsers();
+    var foundUser = false;
+
     for (var i = 0; i < users.length; i++) {
       if (users[i].id == userId) {
         users.splice(i, 1);
         this.saveUsers(users);
-        return this.getListOfUsers();
+        users = this.getListOfUsers();
+        foundUser = true;
       }
     }
 
-    return false;
+    return foundUser !== false ? users : foundUser;
   };
 
   this.deleteAllUsers = function() {
@@ -41,6 +44,10 @@ function AdminUser(userName, email, password) {
 
   this.deleteOrderById = function(orderId) {
     return order.deleteOrderById(orderId);
+  };
+
+  this.deleteAllOrders = function() {
+    return order.deleteAllOrders();
   };
 }
 

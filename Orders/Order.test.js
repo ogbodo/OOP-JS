@@ -51,3 +51,7 @@ test("Admin can delete an order", function() {
 
   expect(admin.deleteOrderById(orderToDelete.id).length).toBe(oldLength);
 });
+
+test("Admin can delete all orders", function() {
+  expect(admin.deleteAllOrders().length).toBe(0);
+});

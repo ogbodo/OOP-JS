@@ -49,14 +49,20 @@ function Order(userId, items) {
   this.updateOrder = function(orderId, items) {
     return updateOrder(orderId, items);
   };
+
   this.deleteOrderById = function(orderId) {
     return deleteOrderById(orderId);
+  };
+
+  this.deleteAllOrders = function(orderId) {
+    return deleteAllOrders();
   };
 }
 
 Order.prototype.getAUserOrders = function() {
   return retrieveAUserOrders(this.id);
 };
+
 function deleteOrderById(orderId) {
   var orders = retrieveAllOrders();
   var foundOrder = false;
@@ -69,6 +75,13 @@ function deleteOrderById(orderId) {
     }
   }
   return foundOrder !== false ? orders : foundOrder;
+}
+
+function deleteAllOrders() {
+  var orders = retrieveAllOrders();
+  orders.splice(0, orders.length);
+  saveOrders(orders);
+  return retrieveAllOrders();
 }
 function retrieveAllOrders() {
   return readJsonFile("../orders.json");
