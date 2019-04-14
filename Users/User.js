@@ -76,6 +76,8 @@ function User(name, email, password) {
     }
     return foundUser;
   };
+
+  this.makeOrder = function(orderObj) {};
 }
 
 function getListOfUsers() {
