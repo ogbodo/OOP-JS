@@ -43,16 +43,19 @@ function User(name, email, password) {
 
   this.updateUserDetails = function(userId, name, email, password) {
     var users = this.getListOfUsers();
+    var foundUser = false;
     for (var i = 0; i < users.length; i++) {
       if (users[i].id == userId) {
         users[i].name = name;
         users[i].email = email;
         users[i].password = password;
+        foundUser = users[i];
+        this.saveUsers(users);
         break;
       }
     }
-    this.saveUsers(users);
-    return this.getUserById(userId);
+
+    return foundUser;
   };
 
   this.getUserByName = function(name) {

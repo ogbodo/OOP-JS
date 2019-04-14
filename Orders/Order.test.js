@@ -1,7 +1,7 @@
 const adminUser = require("../Users/Admin");
 const normalUser = require("../Users/NormalUser");
 
-var admin, user;
+var admin, user, order;
 
 test("An Admin can create new Order", function() {
   admin = new adminUser("King Solomon", "solomon@gmail.com", "solomon");
@@ -31,6 +31,14 @@ test("Admin can read one order by its id", function() {
   admin.addToCart({ itemName: "Bournvita", qty: 21 });
   admin.addToCart({ itemName: "Malt", qty: 99 });
   admin.addToCart({ itemName: "Butter", qty: 75 });
-  var orderId = admin.checkOut().id;
-  expect(admin.getOrderById(orderId)).toBeTruthy();
+  order = admin.checkOut();
+  expect(admin.getOrderById(order.id)).toBeTruthy();
+});
+
+test("Admin can update order details", function() {
+  var itemUpdate = [
+    { itemName: "Bournvita", qty: 12 },
+    { itemName: "Butter", qty: 75 }
+  ];
+  expect(admin.updateOrder(order.id, itemUpdate)).toBeTruthy();
 });

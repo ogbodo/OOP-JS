@@ -33,6 +33,10 @@ function AdminUser(userName, email, password) {
   this.getOrderById = function(orderId) {
     return order.getOrderById(orderId);
   };
+
+  this.updateOrder = function(orderId, items) {
+    return order.updateOrder(orderId, items);
+  };
 }
 
 InheritProperty(AdminUser, User);

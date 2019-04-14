@@ -14,14 +14,6 @@ function Order(userId, items) {
     return dateOfOrder.toLocaleTimeString();
   };
 
-  this.saveOrders = function(orders) {
-    fileSystem.writeFileSync(
-      "../orders.json",
-      JSON.stringify(orders, null, 2),
-      null
-    );
-  };
-
   this.createNewOrder = function() {
     var listOfAllUsersOrder = [];
     listOfAllUsersOrder.push.apply(listOfAllUsersOrder, retrieveAllOrders());
@@ -41,7 +33,7 @@ function Order(userId, items) {
 
     listOfAllUsersOrder.push(order);
 
-    this.saveOrders(listOfAllUsersOrder);
+    saveOrders(listOfAllUsersOrder);
   };
 
   this.createNewOrder();
@@ -50,6 +42,9 @@ function Order(userId, items) {
   };
   this.getOrderById = function(orderId) {
     return retrieveOrderById(orderId);
+  };
+  this.updateOrder = function(orderId, items) {
+    return updateOrder(orderId, items);
   };
 }
 Order.prototype.getAUserOrders = function() {
@@ -71,7 +66,7 @@ function retrieveAUserOrders(userId) {
   return foundUserOrders;
 }
 
-function retrieveAUserOrder(userId, orderId) {}
+// function retrieveAUserOrder(userId, orderId) {}
 
 function retrieveOrderById(orderId) {
   var orders = retrieveAllOrders();
@@ -89,4 +84,25 @@ function readJsonFile(filePath) {
   return JSON.parse(jsonString);
 }
 
+function updateOrder(orderId, items) {
+  var orders = retrieveAllOrders();
+  var foundOrder = false;
+  for (var i = 0; i < orders.length; i++) {
+    if (orders[i].id == orderId) {
+      orders[i].items = items;
+      foundOrder = orders[i];
+      saveOrders(orders);
+      break;
+    }
+  }
+
+  return foundOrder;
+}
+function saveOrders(orders) {
+  fileSystem.writeFileSync(
+    "../orders.json",
+    JSON.stringify(orders, null, 2),
+    null
+  );
+}
 module.exports = Order;
