@@ -45,13 +45,19 @@ function Order(userId, items) {
   };
 
   this.createNewOrder();
+
+  this.getAllOrders = function() {
+    return retrieveAllOrders();
+  };
 }
 Order.prototype.getAUserOrders = function() {
   return retrieveAUserOrders(this.id);
 };
+
 function retrieveAllOrders() {
   return readJsonFile("../orders.json");
 }
+
 function retrieveAUserOrders(userId) {
   var orders = retrieveAllOrders();
   var foundUserOrders = [];
