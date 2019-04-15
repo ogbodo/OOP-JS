@@ -1,6 +1,5 @@
 const adminUser = require("../Users/Admin");
 const normalUser = require("../Users/NormalUser");
-
 var admin, user, order;
 
 test("An Admin can create new Order", function() {
@@ -36,6 +35,10 @@ test("Admin can read one order by its id", function() {
   expect(admin.getOrderById(order.id)).toBeTruthy();
 });
 
+test("The case of none existing order Id", function() {
+  expect(admin.getOrderById(100)).toBeFalsy();
+});
+
 test("Admin can update order details", function() {
   var itemUpdate = [
     { itemName: "Bournvita", qty: 12 },
@@ -49,7 +52,6 @@ test("Admin can delete an order", function() {
   admin.addToCart({ itemName: "Yoghurt", qty: 65 });
   admin.addToCart({ itemName: "Soya Milk", qty: 99 });
   var orderToDelete = admin.checkOut();
-
   expect(admin.deleteOrderById(orderToDelete.id).length).toBe(oldLength);
 });
 

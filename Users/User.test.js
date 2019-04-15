@@ -7,6 +7,7 @@ test("create new admin user", function() {
   admin = new adminUser("Admin1", "solomon@gmail.com", "solomon");
   expect(admin.name).toBe("Admin1");
 });
+
 test("Admin can read all users", function() {
   expect(admin.getListOfUsers()).toBeTruthy();
 });
@@ -60,6 +61,7 @@ test("Admin can delete a user", function() {
     "solomon@gmail.com",
     "king"
   );
+
   expect(admin.deleteUserById(userToDelete.id).length).toBe(oldLength);
 });
 
@@ -78,4 +80,8 @@ test("User can search for a user by name", function() {
 
 test("Admin can delete all users", function() {
   expect(admin.deleteAllUsers().length).toBe(0);
+});
+
+test("In the case of Admin deleting when db is empty", function() {
+  expect(admin.deleteUserById(user.id).length).toBeUndefined();
 });
