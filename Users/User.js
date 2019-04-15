@@ -37,12 +37,8 @@ function User(name, email, password) {
 
   this.createNewUser();
 
-  this.getListOfUsers = function() {
-    return getListOfUsers();
-  };
-
   this.updateUserDetails = function(userId, name, email, password) {
-    var users = this.getListOfUsers();
+    var users = getListOfUsers();
     var foundUser = false;
     for (var i = 0; i < users.length; i++) {
       if (users[i].id == userId) {
@@ -54,12 +50,11 @@ function User(name, email, password) {
         break;
       }
     }
-
     return foundUser;
   };
 
   this.getUserByName = function(name) {
-    var users = this.getListOfUsers();
+    var users = getListOfUsers();
     var foundUser = false;
     for (var i = 0; i < users.length; i++) {
       if (users[i].name == name) {
@@ -81,12 +76,15 @@ function User(name, email, password) {
     }
     return foundUser;
   };
+
   this.addToCart = function(item) {
     this.listOfUserOrders.push(item);
   };
+
   this.checkOut = function() {
     return new orderObject(this.id, this.listOfUserOrders);
   };
+
   this.getAUserOders = function() {
     return this.getAUserOrders(this.id);
   };

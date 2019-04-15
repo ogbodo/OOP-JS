@@ -83,6 +83,7 @@ function deleteAllOrders() {
   saveOrders(orders);
   return retrieveAllOrders();
 }
+
 function retrieveAllOrders() {
   return readJsonFile("../orders.json");
 }
@@ -109,6 +110,7 @@ function retrieveOrderById(orderId) {
   }
   return foundOrder;
 }
+
 function readJsonFile(filePath) {
   const jsonString = fileSystem.readFileSync(filePath);
   return JSON.parse(jsonString);
@@ -125,9 +127,9 @@ function updateOrder(orderId, items) {
       break;
     }
   }
-
   return foundOrder;
 }
+
 function saveOrders(orders) {
   fileSystem.writeFileSync(
     "../orders.json",
