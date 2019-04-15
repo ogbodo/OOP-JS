@@ -29,6 +29,10 @@ test("User can search for a user by id", function() {
   expect(user.getUserById(admin.id).id).toBe(admin.id);
 });
 
+test("The case of none existing Id", function() {
+  expect(user.getUserById(100).id).toBeUndefined();
+});
+
 test("User cannot read all users", function() {
   expect("getListOfUsers" in user).toBeFalsy();
 });
