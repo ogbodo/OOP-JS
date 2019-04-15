@@ -5,9 +5,12 @@ var admin, user, order;
 test("An Admin can create new Order", function() {
   admin = new adminUser("King Solomon", "solomon@gmail.com", "solomon");
   var previousOrderCount = admin.getAUserOders().length;
+
   admin.addToCart({ itemName: "milk", qty: 30 });
+  expect(admin.listOfUserOrders).toEqual([{ itemName: "milk", qty: 30 }]);
   admin.addToCart({ itemName: "Milo", qty: 40 });
   admin.addToCart({ itemName: "conflask", qty: 5 });
+
   admin.checkOut();
   expect(admin.getAUserOders().length).toBe(previousOrderCount + 1);
 });
@@ -53,6 +56,10 @@ test("Admin can delete an order", function() {
   admin.addToCart({ itemName: "Soya Milk", qty: 99 });
   var orderToDelete = admin.checkOut();
   expect(admin.deleteOrderById(orderToDelete.id).length).toBe(oldLength);
+});
+
+test("Admin want to delete a none existing order", function() {
+  expect(admin.deleteOrderById(100)).toBeFalsy();
 });
 
 test("Admin can delete all orders", function() {
