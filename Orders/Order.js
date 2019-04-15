@@ -37,30 +37,30 @@ function Order(userId, items) {
   };
 
   this.createNewOrder();
-
-  this.getAllOrders = function() {
-    return retrieveAllOrders();
-  };
-
-  this.getOrderById = function(orderId) {
-    return retrieveOrderById(orderId);
-  };
-
-  this.updateOrder = function(orderId, items) {
-    return updateOrder(orderId, items);
-  };
-
-  this.deleteOrderById = function(orderId) {
-    return deleteOrderById(orderId);
-  };
-
-  this.deleteAllOrders = function(orderId) {
-    return deleteAllOrders();
-  };
 }
 
 Order.prototype.getAUserOrders = function() {
   return retrieveAUserOrders(this.id);
+};
+
+Order.prototype.getAllOrders = function() {
+  return retrieveAllOrders();
+};
+
+Order.prototype.getOrderById = function(orderId) {
+  return retrieveOrderById(orderId);
+};
+
+Order.prototype.updateOrder = function(orderId, items) {
+  return updateOrder(orderId, items);
+};
+
+Order.prototype.deleteOrderById = function(orderId) {
+  return deleteOrderById(orderId);
+};
+
+Order.prototype.deleteAllOrders = function() {
+  return deleteAllOrders();
 };
 
 function deleteOrderById(orderId) {
@@ -97,8 +97,6 @@ function retrieveAUserOrders(userId) {
   }
   return foundUserOrders;
 }
-
-// function retrieveAUserOrder(userId, orderId) {}
 
 function retrieveOrderById(orderId) {
   var orders = retrieveAllOrders();

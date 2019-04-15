@@ -5,7 +5,7 @@ const InheritProperty = require("./interface");
 
 function AdminUser(userName, email, password) {
   User.call(this, userName, email, password);
-  var order = new orderObject();
+  //var order = new orderObject();
 
   this.deleteUserById = function(userId) {
     var users = this.getListOfUsers();
@@ -30,27 +30,28 @@ function AdminUser(userName, email, password) {
     return this.getListOfUsers();
   };
 
-  this.getAllOrders = function() {
-    return order.getAllOrders();
-  };
+  // this.getAllOrders = function() {
+  //   return this.getAllOrders();
+  // };
 
-  this.getOrderById = function(orderId) {
-    return order.getOrderById(orderId);
-  };
+  // this.getOrderById = function(orderId) {
+  //   return order.getOrderById(orderId);
+  // };
 
-  this.updateOrder = function(orderId, items) {
-    return order.updateOrder(orderId, items);
-  };
+  // this.updateOrder = function(orderId, items) {
+  //   return order.updateOrder(orderId, items);
+  // };
 
-  this.deleteOrderById = function(orderId) {
-    return order.deleteOrderById(orderId);
-  };
+  // this.deleteOrderById = function(orderId) {
+  //   return order.deleteOrderById(orderId);
+  // };
 
-  this.deleteAllOrders = function() {
-    return order.deleteAllOrders();
-  };
+  // this.deleteAllOrders = function() {
+  //   return order.deleteAllOrders();
+  // };
 }
 
 InheritProperty(AdminUser, User);
+// Admin.prototype=Order.prototype;
 
 module.exports = AdminUser;
