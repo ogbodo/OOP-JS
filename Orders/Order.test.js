@@ -7,9 +7,13 @@ test("An Admin can create new Order", function() {
   var previousOrderCount = admin.getAUserOders().length;
 
   admin.addToCart({ itemName: "milk", qty: 30 });
-  expect(admin.listOfUserOrders).toEqual([{ itemName: "milk", qty: 30 }]);
   admin.addToCart({ itemName: "Milo", qty: 40 });
   admin.addToCart({ itemName: "conflask", qty: 5 });
+  expect(admin.listOfUserOrders).toEqual([
+    { itemName: "milk", qty: 30 },
+    { itemName: "Milo", qty: 40 },
+    { itemName: "conflask", qty: 5 }
+  ]);
 
   admin.checkOut();
   expect(admin.getAUserOders().length).toBe(previousOrderCount + 1);
@@ -17,13 +21,21 @@ test("An Admin can create new Order", function() {
 
 test("A Normal User can create new Order", function() {
   user = new normalUser("Treasure Izu", "solomon@gmail.com", "solomon");
-  // var previousOrderCount = user.getAUserOders().length;
+  var previousOrderCount = user.getAUserOders().length;
   user.addToCart({ itemName: "egg", qty: 500 });
   user.addToCart({ itemName: "malt", qty: 44 });
   user.addToCart({ itemName: "Indomi", qty: 50 });
   user.addToCart({ itemName: "Spagetti", qty: 102 });
-  var order = user.checkOut();
-  expect(order).toBe(order);
+
+  expect(user.listOfUserOrders).toEqual([
+    { itemName: "egg", qty: 500 },
+    { itemName: "malt", qty: 44 },
+    { itemName: "Indomi", qty: 50 },
+    { itemName: "Spagetti", qty: 102 }
+  ]);
+
+  user.checkOut();
+  expect(user.getAUserOders().length).toBe(previousOrderCount + 1);
 });
 
 test("Admin can read all orders", function() {
@@ -40,6 +52,7 @@ test("Admin can read one order by its id", function() {
   order = admin.checkOut();
   expect(admin.getOrderById(order.id)).toBeTruthy();
 });
+
 test("User cannot read one order by its id", function() {
   user.addToCart({ itemName: "Bournvita", qty: 21 });
   user.addToCart({ itemName: "Malt", qty: 99 });

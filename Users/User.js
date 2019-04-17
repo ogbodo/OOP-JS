@@ -87,11 +87,7 @@ function User(name, email, password, role) {
   };
 
   this.getAUserOders = function() {
-    if (this.role === "admin") {
-      return this.getAUserOrders(this.id);
-    } else {
-      return false;
-    }
+    return this.getAUserOrders(this.id);
   };
 }
 
