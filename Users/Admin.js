@@ -1,10 +1,10 @@
 const fileSystem = require("fs");
 const User = require("./User");
-const orderObject = require("../Orders/Order.js");
 const InheritProperty = require("./interface");
 
 function AdminUser(userName, email, password) {
-  User.call(this, userName, email, password);
+  User.call(this, userName, email, password, "admin");
+
   this.deleteUserById = function(userId) {
     var users = this.getListOfUsers();
     var foundUser = false;

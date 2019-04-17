@@ -44,23 +44,43 @@ Order.prototype.getAUserOrders = function() {
 };
 
 Order.prototype.getAllOrders = function() {
-  return retrieveAllOrders();
+  if (this.role === "admin") {
+    return retrieveAllOrders();
+  } else {
+    return false;
+  }
 };
 
 Order.prototype.getOrderById = function(orderId) {
-  return retrieveOrderById(orderId);
+  if (this.role === "admin") {
+    return retrieveOrderById(orderId);
+  } else {
+    return false;
+  }
 };
 
 Order.prototype.updateOrder = function(orderId, items) {
-  return updateOrder(orderId, items);
+  if (this.role === "admin") {
+    return updateOrder(orderId, items);
+  } else {
+    return false;
+  }
 };
 
 Order.prototype.deleteOrderById = function(orderId) {
-  return deleteOrderById(orderId);
+  if (this.role === "admin") {
+    return deleteOrderById(orderId);
+  } else {
+    return false;
+  }
 };
 
 Order.prototype.deleteAllOrders = function() {
-  return deleteAllOrders();
+  if (this.role === "admin") {
+    return deleteAllOrders();
+  } else {
+    return false;
+  }
 };
 
 function deleteOrderById(orderId) {
@@ -92,7 +112,7 @@ function retrieveAUserOrders(userId) {
   var orders = retrieveAllOrders();
   var foundUserOrders = [];
   for (var i = 0; i < orders.length; i++) {
-    if (orders[i].userId == userId) {
+    if (orders[i].userId === userId) {
       foundUserOrders.push(orders[i]);
     }
   }
