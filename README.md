@@ -34,3 +34,18 @@
 
  ### *NOTE: All methods marked asterisk(\*) can be carried out by an ADMIN user alone, and Jest was used for testing.*<br>
 
+### To setup and run the project
+```
+Clone the Project
+Install the jest framework for testing
+npm init
+npm install --save-dev jest
+
+// change the value of test in scripts to jest in your package.json
+
+{
+  "scripts": {
+    "test": "jest"
+  }
+}
+To run all test cases: npm test
