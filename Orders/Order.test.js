@@ -1,5 +1,5 @@
 const adminUser = require("../Users/Admin");
-const normalUser = require("../Users/NormalUser");
+const normalUser = require("../Users/User");
 var admin, user, order;
 
 test("An Admin can create new Order", function() {

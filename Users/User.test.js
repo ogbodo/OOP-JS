@@ -1,5 +1,5 @@
 const adminUser = require("./Admin");
-const normalUser = require("./NormalUser");
+const normalUser = require("./User");
 
 var admin, user;
 
