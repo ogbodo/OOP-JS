@@ -1,0 +1,23 @@
+{
+  "name": "OOP-JS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ogbodo/OOP-JS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ogbodo/OOP-JS/issues"
+  },
+  "homepage": "https://github.com/ogbodo/OOP-JS#readme",
+  "dependencies": {
+    "jest": "^24.7.1"
+  }
+}

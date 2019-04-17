@@ -1,7 +1,8 @@
 const fileSystem = require("fs");
 const orderObject = require("../Orders/Order.js");
 
-function User(name, email, password) {
+function User(name, email, password, role) {
+  this.role = role || "user";
   this.name = name;
   this.email = email;
   this.password = password;
@@ -86,7 +87,11 @@ function User(name, email, password) {
   };
 
   this.getAUserOders = function() {
-    return this.getAUserOrders(this.id);
+    if (this.role === "admin") {
+      return this.getAUserOrders(this.id);
+    } else {
+      return false;
+    }
   };
 }
 

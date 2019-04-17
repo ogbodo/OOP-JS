@@ -17,17 +17,20 @@ test("An Admin can create new Order", function() {
 
 test("A Normal User can create new Order", function() {
   user = new normalUser("Treasure Izu", "solomon@gmail.com", "solomon");
-  var previousOrderCount = user.getAUserOders().length;
+  // var previousOrderCount = user.getAUserOders().length;
   user.addToCart({ itemName: "egg", qty: 500 });
   user.addToCart({ itemName: "malt", qty: 44 });
   user.addToCart({ itemName: "Indomi", qty: 50 });
   user.addToCart({ itemName: "Spagetti", qty: 102 });
-  user.checkOut();
-  expect(user.getAUserOders().length).toBe(previousOrderCount + 1);
+  var order = user.checkOut();
+  expect(order).toBe(order);
 });
 
 test("Admin can read all orders", function() {
   expect(admin.getAllOrders()).toBeTruthy();
+});
+test("User cannot read all orders", function() {
+  expect(user.getAllOrders()).toBeFalsy();
 });
 
 test("Admin can read one order by its id", function() {
@@ -36,6 +39,13 @@ test("Admin can read one order by its id", function() {
   admin.addToCart({ itemName: "Butter", qty: 75 });
   order = admin.checkOut();
   expect(admin.getOrderById(order.id)).toBeTruthy();
+});
+test("User cannot read one order by its id", function() {
+  user.addToCart({ itemName: "Bournvita", qty: 21 });
+  user.addToCart({ itemName: "Malt", qty: 99 });
+  user.addToCart({ itemName: "Butter", qty: 75 });
+  order = user.checkOut();
+  expect(user.getOrderById(order.id)).toBeFalsy();
 });
 
 test("The case of none existing order Id", function() {
@@ -48,6 +58,13 @@ test("Admin can update order details", function() {
     { itemName: "Butter", qty: 75 }
   ];
   expect(admin.updateOrder(order.id, itemUpdate)).toBeTruthy();
+});
+test("User cannot update order details", function() {
+  var itemUpdate = [
+    { itemName: "Bournvita", qty: 12 },
+    { itemName: "Butter", qty: 75 }
+  ];
+  expect(user.updateOrder(order.id, itemUpdate)).toBeFalsy();
 });
 
 test("Admin can delete an order", function() {

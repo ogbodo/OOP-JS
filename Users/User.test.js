@@ -35,7 +35,7 @@ test("The case of none existing Id", function() {
 });
 
 test("User cannot read all users", function() {
-  expect("getListOfUsers" in user).toBeFalsy();
+  expect(user.getListOfUsers).toBeFalsy();
 });
 
 test("Admin can update the details of a user", function() {
@@ -65,6 +65,10 @@ test("Admin can delete a user", function() {
   expect(admin.deleteUserById(userToDelete.id).length).toBe(oldLength);
 });
 
+test("User cannot delete a user", function() {
+  expect("deleteUserById" in user).toBeFalsy();
+});
+
 test("Admin can search for a user by name", function() {
   expect(admin.getUserByName(user.name)).toBeTruthy();
 });
@@ -80,6 +84,9 @@ test("User can search for a user by name", function() {
 
 test("Admin can delete all users", function() {
   expect(admin.deleteAllUsers().length).toBe(0);
+});
+test("User cannot delete all users", function() {
+  expect("deleteAllUsers" in user).toBeFalsy();
 });
 
 test("In the case of Admin deleting when db is empty", function() {
