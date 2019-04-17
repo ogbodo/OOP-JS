@@ -75,6 +75,13 @@ test("Admin can delete an order", function() {
   expect(admin.deleteOrderById(orderToDelete.id).length).toBe(oldLength);
 });
 
+test("User cannot delete an order", function() {
+  user.addToCart({ itemName: "Yoghurt", qty: 65 });
+  user.addToCart({ itemName: "Soya Milk", qty: 99 });
+  var orderToDelete = user.checkOut();
+  expect(user.deleteOrderById(orderToDelete.id)).toBeFalsy();
+});
+
 test("Admin want to delete a none existing order", function() {
   expect(admin.deleteOrderById(100)).toBeFalsy();
 });

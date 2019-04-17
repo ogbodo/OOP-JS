@@ -68,7 +68,11 @@ Order.prototype.updateOrder = function(orderId, items) {
 };
 
 Order.prototype.deleteOrderById = function(orderId) {
-  return deleteOrderById(orderId);
+  if (this.role === "admin") {
+    return deleteOrderById(orderId);
+  } else {
+    return false;
+  }
 };
 
 Order.prototype.deleteAllOrders = function() {
