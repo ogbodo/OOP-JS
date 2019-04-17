@@ -89,3 +89,6 @@ test("Admin want to delete a none existing order", function() {
 test("Admin can delete all orders", function() {
   expect(admin.deleteAllOrders().length).toBe(0);
 });
+test("User cannot delete all orders", function() {
+  expect(user.deleteAllOrders()).toBeFalsy();
+});
