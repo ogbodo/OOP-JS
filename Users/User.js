@@ -8,6 +8,7 @@ function User(name, email, password, role) {
   this.password = password;
   this.id = 0;
   this.listOfUserOrders = [];
+  console.log(this);
 
   this.saveUsers = function(listOfUsers) {
     fileSystem.writeFileSync(
@@ -85,11 +86,12 @@ function User(name, email, password, role) {
   this.checkOut = function() {
     return new orderObject(this.id, this.listOfUserOrders);
   };
-
-  this.getAUserOders = function() {
-    return this.getAUserOrders(this.id);
-  };
 }
+Object.assign(User.prototype, orderObject.prototype);
+
+User.prototype.getAUserOders = function() {
+  return this.getAUserOrders(this.id);
+};
 
 function getListOfUsers() {
   return readJsonFile("../db.json");
@@ -100,6 +102,6 @@ function readJsonFile(filePath) {
   return JSON.parse(jsonString);
 }
 
-User.prototype = orderObject.prototype;
+// User.prototype = orderObject.prototype;
 
 module.exports = User;
