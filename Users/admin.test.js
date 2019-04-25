@@ -48,6 +48,7 @@ test("Admin can delete a user", function() {
     "solomon@gmail.com",
     "king"
   );
+  console.log("userToDelete", userToDelete);
 
   expect(admin.deleteUserById(userToDelete.id).length).toBe(oldLength);
 });
@@ -65,5 +66,5 @@ test("Admin can delete all users", function() {
 });
 
 test("In the case of Admin deleting when db is empty", function() {
-  expect(admin.deleteUserById(user.id).length).toBeUndefined();
+  expect(admin.deleteUserById(user.id).length).toBe(0);
 });

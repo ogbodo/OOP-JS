@@ -41,9 +41,6 @@ test("A Normal User can create new Order", function() {
 test("Admin can read all orders", function() {
   expect(admin.getAllOrders()).toBeTruthy();
 });
-test("User cannot read all orders", function() {
-  expect(user.getAllOrders()).toBeFalsy();
-});
 
 test("Admin can read one order by its id", function() {
   admin.addToCart({ itemName: "Bournvita", qty: 21 });
@@ -51,14 +48,6 @@ test("Admin can read one order by its id", function() {
   admin.addToCart({ itemName: "Butter", qty: 75 });
   order = admin.checkOut();
   expect(admin.getOrderById(order.id)).toBeTruthy();
-});
-
-test("User cannot read one order by its id", function() {
-  user.addToCart({ itemName: "Bournvita", qty: 21 });
-  user.addToCart({ itemName: "Malt", qty: 99 });
-  user.addToCart({ itemName: "Butter", qty: 75 });
-  order = user.checkOut();
-  expect(user.getOrderById(order.id)).toBeFalsy();
 });
 
 test("The case of none existing order Id", function() {
@@ -72,13 +61,6 @@ test("Admin can update order details", function() {
   ];
   expect(admin.updateOrder(order.id, itemUpdate)).toBeTruthy();
 });
-test("User cannot update order details", function() {
-  var itemUpdate = [
-    { itemName: "Bournvita", qty: 12 },
-    { itemName: "Butter", qty: 75 }
-  ];
-  expect(user.updateOrder(order.id, itemUpdate)).toBeFalsy();
-});
 
 test("Admin can delete an order", function() {
   var oldLength = admin.getAllOrders().length;
@@ -88,20 +70,10 @@ test("Admin can delete an order", function() {
   expect(admin.deleteOrderById(orderToDelete.id).length).toBe(oldLength);
 });
 
-test("User cannot delete an order", function() {
-  user.addToCart({ itemName: "Yoghurt", qty: 65 });
-  user.addToCart({ itemName: "Soya Milk", qty: 99 });
-  var orderToDelete = user.checkOut();
-  expect(user.deleteOrderById(orderToDelete.id)).toBeFalsy();
-});
-
 test("Admin want to delete a none existing order", function() {
   expect(admin.deleteOrderById(100)).toBeFalsy();
 });
 
 test("Admin can delete all orders", function() {
   expect(admin.deleteAllOrders().length).toBe(0);
-});
-test("User cannot delete all orders", function() {
-  expect(user.deleteAllOrders()).toBeFalsy();
 });
